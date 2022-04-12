@@ -1,17 +1,17 @@
-version: "3.8"
+version: "3.8" 
 
-services:
-  site:
-    image: developer10/site
+services: #Quais sao os servicos
+  site: #Site
+    image: developer10/site # Imagem docker do site
     deploy:
-      replicas: 5
+      replicas: 5 # Quantidade de replicas
       placement:
-        constraints: [node.role == manager]
+        constraints: [node.role == manager] # Quem recebe as informacoes (trabalhadores ou administradores)
     ports:
-      - 3000:80
+      - 3000:80 # Determinar qual a porta desse servico
     depends_on:
-      - db
-  db:
+      - db # Determinar de qual servico este e dependente
+  db: # Banco de dados
     image: postgres:13
     environment:
       - POSTGRES_USER=postgres
@@ -23,7 +23,7 @@ services:
     deploy:
       placement:
         constraints: [node.role == manager] 
-  visualizer:
+  visualizer: # Visualiza o que cada maquina esta fazendo
     image: dockersamples/visualizer:stable
     ports:
     - "8888:8080"
